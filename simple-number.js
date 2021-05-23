@@ -5,7 +5,7 @@ const GetSimpleNumbers = function (numMin, numMax) {
   nextNumber:
     for (let i = numMin; i <= numMax; i++) {
 
-      for (let j = numMin; j < i; j++) {
+      for (let j = 2; j < i; j++) {
         if (i % j === 0) continue nextNumber
       }
 
