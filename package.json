@@ -1,0 +1,8 @@
+{
+  "name": "node-geekbrains",
+  "version": "1.0.0",
+  "dependencies": {},
+  "devDependencies": {
+    "split2": "^3.2.2"
+  }
+}
