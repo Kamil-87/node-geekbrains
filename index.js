@@ -1,33 +1,35 @@
-require('colors')
 const colors = require("colors")
+const getPrimeNumbers = require('./prime-numbers')
+
 colors.setTheme({
   error: 'red'
 })
 
+function trafficLightPrimeNumbers(numMin, numMax) {
 
-const getSimpleNumbers = require('./simple-number')
+  numMin = parseInt(numMin)
+  numMax = parseInt(numMax)
 
-function stoplightSimpleNumbers(numMin, numMax) {
-
-  numMin = +numMin
-  numMax = +numMax
-
- if( (!(typeof numMin === 'number') || isNaN(numMin) ) || (!(typeof numMax === 'number') || isNaN(numMax)) ) {
+ if( (isNaN(numMin) ) || isNaN(numMax) ) {
     return console.log(colors.error(`один из переданных аргументов не число ${numMin}, ${numMax}`))
   }
-  if(numMax < numMin) {
+  if(numMin > numMax) {
     return console.log(colors.error(`numMax: ${colors.bgWhite(numMax)} должно быть больше numMin: ${colors.bgWhite(numMin)}`))
   }
 
-  const simpleNumber = getSimpleNumbers(numMin, numMax)
+  if(numMin < 2) {
+    return console.log(colors.error(`numMin: ${colors.bgWhite(numMin)} должно быть больше или равен 2`))
+  }
 
-  if(!simpleNumber.length) {
+  const primeNumbers = getPrimeNumbers(numMin, numMax)
+
+  if(primeNumbers.length < 0) {
     console.log(colors.red(`простых чисел в диапазоне ${numMin}, ${numMax} нет`))
   }
 
-  if(simpleNumber[0]) console.log(colors.green( simpleNumber[0]))
-  if(simpleNumber[1]) console.log(colors.yellow( simpleNumber[1]))
-  if(simpleNumber[2]) console.log(colors.red( simpleNumber[2]))
+  if(primeNumbers[0]) console.log(colors.green( primeNumbers[0]))
+  if(primeNumbers[1]) console.log(colors.yellow( primeNumbers[1]))
+  if(primeNumbers[2]) console.log(colors.red( primeNumbers[2]))
 }
 
-stoplightSimpleNumbers(numMin=process.argv[2], numMax=process.argv[3])
+trafficLightPrimeNumbers(process.argv[2], process.argv[3])
