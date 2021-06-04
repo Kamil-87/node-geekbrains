@@ -5,34 +5,32 @@
 Важно, чтобы работа программы основывалась на событиях.
  */
 
-const EventEmitter = require('events');
+const events = require('events')
+const myEmit = new events.EventEmitter()
 
-const timersSettings = [
-  1000
-]
-const myTime = '21-03-06-2021'
+const myTime = '41-10-04-06-2021'
 
-function timeConversion(date) {
-  let arr = date.split('-').reverse()
-  // arr = arr.map(num => parseInt(num))
-  return arr.join('-')
+function dateConversion(date) {
+  const arr = date.split('-').reverse()
+  const arrDate = arr.slice(0, 3).join('-')
+  const arrTime = arr.slice(3).join(':')
+  return `${arrDate}T${arrTime}`
 }
 
-function diffTime (plannedTime) {
-  return plannedTime - Date.now()
+function diffTime(plannedTime) {
+  return new Date(plannedTime).getTime() - Date.now()
 }
 
-function addToTimersSettings() {
-  const time = timeConversion(myTime)
-  // const timer = diffTime(time)
-  const timer = 4000
-  timersSettings.push(timer)
+function addToTimersSettings(date) {
+  return diffTime(dateConversion(date))
 }
 
-function outputOfQuantityOfTimers (arrayTimers) {
+function outputOfQuantityOfTimers(date) {
+  const timersSettings = []
+  timersSettings.push(addToTimersSettings(date))
   let timersCount = 0
 
-  for(let i = 0; i < arrayTimers.length; i++) {
+  for (let i = 0; i < timersSettings.length; i++) {
     const timeout = timersSettings[i]
     timersCount = ++timersCount
 
@@ -44,18 +42,16 @@ function outputOfQuantityOfTimers (arrayTimers) {
   const intervalId = setInterval(() => {
     console.log('Active timers count', timersCount)
 
-    if(timersCount === 0) {
+    if (timersCount === 0) {
       clearInterval(intervalId)
     }
   }, 1000)
 }
 
+myEmit.on('some_event', function (date) {
+  outputOfQuantityOfTimers(date)
+})
 
-function start() {
-  addToTimersSettings()
-  outputOfQuantityOfTimers(timersSettings)
-}
-
-start()
-
-console.log(timeConversion(myTime))
+myEmit.emit('some_event', process.argv[2])
+myEmit.emit('some_event', process.argv[3])
+myEmit.emit('some_event', process.argv[4])
