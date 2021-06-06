@@ -12,6 +12,7 @@ const eventEmitter = new events.EventEmitter()
 const timersSettings = []
 const myTime1 = '32-11-06-06-2021'
 const myTime2 = '31-11-06-06-2021'
+const myTime = '19-12-06-06-2021'
 
 
 function dateConversion(date) {
@@ -47,10 +48,10 @@ function outputOfQuantityOfTimers(timers) {
   }, 1000)
 }
 
-function addToTimersSettings(date) {
-  const timer = diffTime(dateConversion(date))
+async function addToTimersSettings(date) {
+  const timer = await diffTime(dateConversion(date))
   if(timer > 1000) {
-    timersSettings.push(timer)
+    await timersSettings.push(timer)
     console.log(timersSettings )
   }
 }
