@@ -1,0 +1,31 @@
+{
+  "name": "node-geekbrains",
+  "version": "1.0.0",
+  "dependencies": {
+    "inquirer": "^8.1.0",
+    "yargs": "^17.0.1"
+  },
+  "devDependencies": {
+    "split2": "^3.2.2"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node cli.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kamil-87/node-geekbrains.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kamil-87/node-geekbrains/issues"
+  },
+  "homepage": "https://github.com/Kamil-87/node-geekbrains#readme",
+  "description": "",
+  "bin": {
+    "reader": "index.js"
+  }
+}
